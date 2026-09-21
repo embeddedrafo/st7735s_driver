@@ -91,7 +91,7 @@ void st7735_fill_screen(const st7735s_t *handler, uint16_t color);
 void st7735_draw_hline(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t length, uint16_t color);
 void st7735_draw_vline(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t length, uint16_t color);
 
-//void st7735_draw_line(const st7735s_t *handler, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void st7735_draw_line(const st7735s_t *handler, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
 //void st7735_draw_rect(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 //void st7735_draw_circle(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t r, uint16_t color);
 //void st7735_fill_circle(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t r, uint16_t color);

@@ -160,6 +160,69 @@ void st7735_draw_vline(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_
 	st7735_fill_rect(handler, x, y, 1, length, color);
 }
 
+uint16_t abs_custom(int16_t value)
+{
+	return (value > 0) ? value : -value;
+}
+
+void st7735_draw_line(const st7735s_t *handler, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color)
+{
+	int16_t dx = x1 - x0;
+	int16_t dy = y1 - y0;
+
+	int16_t dirx = (dx < 0) ? -1 : 1;
+	int16_t diry = (dy < 0) ? -1 : 1;
+
+	dx = abs_custom(dx);
+	dy = abs_custom(dy);
+
+	if (dx >= dy)
+	{
+		int16_t y;
+		int16_t p;
+
+		if (dx != 0)
+		{
+			y = y0;
+			p = 2*dy - dx;
+			for (int16_t i = 0; i <= dx; i++)
+			{
+				st7735_draw_pixel(handler,x0 + dirx*i,y, color);
+
+				if (p >= 0)
+				{
+					y += diry;
+					p = p - 2*dx;
+				}
+				p = p + 2 * dy;
+			}
+		}
+	}
+	else
+	{
+
+		int16_t x;
+		int16_t p;
+
+		if (dy != 0)
+		{
+			x = x0;
+			p = 2*dx - dy;
+			for (int16_t i = 0; i <= dy; i++)
+			{
+				st7735_draw_pixel(handler,x ,y0 + diry*i, color);
+
+				if (p >= 0)
+				{
+					x += dirx;
+					p = p - 2*dy;
+				}
+				p = p + 2 * dx;
+			}
+		}
+	}
+}
+
 void st7735_draw_bitmap(const st7735s_t *handler, uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t *bitmap)
 {
 	st7735_set_window(handler, x, y, (x + w) - 1, (y + h) - 1);
